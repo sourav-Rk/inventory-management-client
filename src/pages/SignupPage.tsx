@@ -5,6 +5,9 @@ import * as yup from "yup";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 
+
+
+
 // Validation Schema
 const signupSchema = yup.object({
   name: yup
@@ -15,7 +18,7 @@ const signupSchema = yup.object({
     .string()
     .email("Invalid email address")
     .required("Email is required"),
-  phoneNumber: yup.string().optional().transform((value) => value || undefined),
+  phoneNumber: yup.string().nullable(),
   password: yup
     .string()
     .required("Password is required")
@@ -53,7 +56,7 @@ const SignupPage: React.FC = () => {
       await registerAuth({ 
           name: data.name, 
           email: data.email, 
-          phoneNumber: data.phoneNumber ?? undefined, 
+          phoneNumber: data.phoneNumber || undefined, 
           password: data.password,
           confirmPassword : data.confirmPassword
       });

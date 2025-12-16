@@ -74,27 +74,35 @@ const SalesPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type, checked } = event.target;
-    if (type === "checkbox") {
+    const handleInputChange = (
+      event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+      const target = event.target;
+      const name = target.name;
+
+      if (target instanceof HTMLInputElement && target.type === "checkbox") {
+        setForm((prev) => ({
+          ...prev,
+          [name]: target.checked,
+        }));
+        return;
+      }
+
+      if (name === "quantity") {
+        setForm((prev) => ({
+          ...prev,
+          quantity: Number(target.value) || 1,
+        }));
+        return;
+      }
+
       setForm((prev) => ({
         ...prev,
-        [name]: checked,
+        [name]: target.value,
       }));
-    } else if (name === "quantity") {
-      setForm((prev) => ({
-        ...prev,
-        quantity: Number(value) || 1,
-      }));
-    } else {
-      setForm((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
+    };
+
+
 
   const validateForm = (): string | null => {
     if (!form.itemId) return "Please select an item.";
