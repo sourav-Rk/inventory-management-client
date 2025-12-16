@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -71,16 +71,6 @@ const LoginPage: React.FC = () => {
             Sign In
           </button>
         </form>
-
-        <p className="mt-4 text-center text-sm text-gray-500">
-          Don't have an account?{" "}
-          <Link
-            to="/signup"
-            className="text-blue-600 hover:underline font-medium"
-          >
-            Signup
-          </Link>
-        </p>
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import LoginPage from "../pages/LoginPage";
-import SignupPage from "../pages/SignupPage";
 
 import Dashboard from "../pages/Dashboard";
 import ItemsPage from "../pages/ItemsPage";
@@ -17,7 +16,6 @@ const AppRoutes = () => {
     <Routes>
       {/* Public Routes */}
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
 
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
