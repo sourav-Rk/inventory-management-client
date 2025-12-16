@@ -15,7 +15,7 @@ const signupSchema = yup.object({
     .string()
     .email("Invalid email address")
     .required("Email is required"),
-  phoneNumber: yup.string().optional().nullable(),
+  phoneNumber: yup.string().optional().transform((value) => value || undefined),
   password: yup
     .string()
     .required("Password is required")
