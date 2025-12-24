@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
+  const [pending,setPending] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,9 +13,12 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setPending(true)
       await login({ email, password });
       navigate("/");
+      setPending(false)
     } catch (err) {
+      setPending(false);
       setError("Invalid email or password");
     }
   };
@@ -65,10 +69,11 @@ const LoginPage: React.FC = () => {
           </div>
 
           <button
+            disabled={pending}
             type="submit"
             className="w-full bg-bronze-500 hover:bg-bronze-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 transform hover:scale-[1.02]"
           >
-            Sign In
+           {pending ? "signing in.." : "Sign In"}
           </button>
         </form>
       </div>
